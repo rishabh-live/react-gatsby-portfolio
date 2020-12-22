@@ -31,7 +31,7 @@ console.log("Second : "+ isDark)
   }
 
   return (
-    <ThemeProvider theme={isDark === "dark" ? designLanguage.dark : designLanguage.light} >
+    <ThemeProvider theme={isDark == "dark" ? designLanguage.dark : designLanguage.light} >
       <GlobalStyle />
 
       <Header toggleTheme={toggleTheme} isDark={isDark} />
