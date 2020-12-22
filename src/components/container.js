@@ -11,7 +11,9 @@ export default function Container({ children }) {
 
   if (isDark === null) {
     setIsDark("dark")
-  }
+  }else {
+    setIsDark("light")
+}
   const toggleTheme = () => {
     if (isDark === "dark") {
       if (typeof window !== "undefined") {
