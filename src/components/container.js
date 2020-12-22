@@ -8,23 +8,25 @@ export default function Container({ children }) {
   let [isDark, setIsDark] = useState(
     typeof window !== "undefined" ? localStorage.getItem("rp/theme") : null
   )
-
+console.log("First : "+ isDark)
   if (isDark === null) {
     setIsDark("dark")
   }
-
+console.log("Second : "+ isDark)
   const toggleTheme = () => {
     if (isDark === "dark") {
       if (typeof window !== "undefined") {
         localStorage.setItem("rp/theme", "light")
+        setIsDark("light")
       }
-      setIsDark("light")
+      
     } else {
       if (typeof window !== "undefined"){
         localStorage.setItem("rp/theme", "dark")
+        setIsDark("dark")
       }
 
-      setIsDark("dark")
+     
     }
   }
 
