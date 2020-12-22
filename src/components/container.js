@@ -12,9 +12,7 @@ export default function Container({ children }) {
   if (isDark === null) {
     setIsDark("dark")
   }
-  else{
-    localStorage.setItem("rp/theme", "light")
-  }
+
   const toggleTheme = () => {
     if (isDark === "dark") {
       if (typeof window !== "undefined") {
@@ -22,8 +20,9 @@ export default function Container({ children }) {
       }
       setIsDark("light")
     } else {
-      if (typeof window !== "undefined")
+      if (typeof window !== "undefined"){
         localStorage.setItem("rp/theme", "dark")
+      }
 
       setIsDark("dark")
     }
