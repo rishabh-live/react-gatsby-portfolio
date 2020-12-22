@@ -5,46 +5,42 @@ import designLanguage from "../design-language"
 import { Header } from "./Header"
 import GlobalStyle from "../design-language/styles/GlobalStyles"
 export default function Container({ children }) {
-    let [isDark, setIsDark] = useState(
-        typeof window !== "undefined" ? localStorage.getItem("rp/theme") : null
-    )
+  let [isDark, setIsDark] = useState(
+    typeof window !== "undefined" ? localStorage.getItem("rp/theme") : null
+  )
 
-    if (isDark === null) {
-        setIsDark("dark")
+  if (isDark === null) {
+    setIsDark("dark")
+  }else {
+    setIsDark("light")
+  }
+  const toggleTheme = () => {
+    if (isDark === "dark") {
+      if (typeof window !== "undefined") {
+        localStorage.setItem("rp/theme", "light")
+      }
+      setIsDark("light")
     } else {
-        setIsDark("light")
+      if (typeof window !== "undefined")
+        localStorage.setItem("rp/theme", "dark")
+
+      setIsDark("dark")
     }
-    const toggleTheme = () => {
-        if (isDark === "dark") {
-            if (typeof window !== "undefined") {
-                localStorage.setItem("rp/theme", "light")
-            }
-            setIsDark("light")
-        } else {
-            if (typeof window !== "undefined")
-                localStorage.setItem("rp/theme", "dark")
+  }
 
-            setIsDark("dark")
-        }
-    }
+  return (
+    <ThemeProvider theme={isDark === "dark" ? designLanguage.dark : designLanguage.light} >
+      <GlobalStyle />
 
-    return ( <
-        ThemeProvider theme = { isDark === "dark" ? designLanguage.dark : designLanguage.light } >
-        <
-        GlobalStyle / >
+      <Header toggleTheme={toggleTheme} isDark={isDark} />
 
-        <
-        Header toggleTheme = { toggleTheme }
-        isDark = { isDark }
-        />
-
-        <
-        StyledContainer id = "container" > { children } < /StyledContainer> { /* <Footer /> */ } <
-        /ThemeProvider>
-    )
+      <StyledContainer id="container">{children}</StyledContainer>
+      {/* <Footer /> */}
+    </ThemeProvider>
+  )
 }
 
-const StyledContainer = styled.section `
+const StyledContainer = styled.section`
   display: flex;
   margin: 0 auto;
   max-width: ${props => props.theme.breakpoints[1]};
