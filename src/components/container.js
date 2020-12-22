@@ -13,7 +13,7 @@ export default function Container({ children }) {
     setIsDark("dark")
   }
   else{
-    setIsDark("light")
+    localStorage.setItem("rp/theme", "light")
   }
   const toggleTheme = () => {
     if (isDark === "dark") {
